@@ -4,7 +4,7 @@
   "description": "Backend for Design Your Life App",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env DB_ENV=testing jest --watch"
+    "test": "jest --watch --verbose"
   },
   "repository": {
     "type": "git",
