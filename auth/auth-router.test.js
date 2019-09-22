@@ -40,4 +40,15 @@ describe('POST /register', () => {
       .send(missingPassword);
     expect(missingPasswordRes.status).toBe(400);
   });
+  it('should return a 201 when successfully created', async () => {
+    const user = {
+      username: 'testUser',
+      password: 'testPassword',
+      email: 'testEmail@designyourlife.com'
+    };
+    const res = await request(server)
+      .post('/api/auth/register')
+      .send(user);
+    expect(res.status).toBe(201);
+  });
 });
