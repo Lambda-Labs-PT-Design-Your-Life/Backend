@@ -3,17 +3,17 @@ const db = require('../database/dbConfig.js');
 module.exports = {
   addUser,
   findUser,
-  findUserBy
+  findUserById
 };
 
 async function addUser(user) {
   const [id] = await db('users').insert(user);
 
-  return findBy(id);
+  return findUserById(id);
 }
 function findUser() {}
-function findUserBy(typeString, type) {
+function findUserById(id) {
   return db('users')
-    .where({ type })
+    .where({ id })
     .first();
 }

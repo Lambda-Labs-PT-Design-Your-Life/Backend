@@ -66,4 +66,17 @@ describe('POST /register', () => {
     expect(users[0].email).toBe('testEmail@designyourlife.com');
     expect(users[0].password).not.toBe(null || undefined);
   });
+  it('Password Should be hashed and not be stored in the database in plain text', async () => {
+    const user = {
+      username: 'testUser',
+      password: 'testPassword',
+      email: 'testEmail@designyourlife.com'
+    };
+    const res = await request(server)
+      .post('/api/auth/register')
+      .send(user);
+    const users = await db.select('*').from('users');
+    expect(users.length).toBe(1);
+    expect(users[0].password).not.toBe('testPassword');
+  });
 });
