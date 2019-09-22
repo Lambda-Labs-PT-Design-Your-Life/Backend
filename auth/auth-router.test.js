@@ -20,4 +20,24 @@ describe('POST /register', () => {
 
     expect(missingUsernameRes.status).toBe(400);
   });
+  it('should return a 400 when email is missing', async () => {
+    const missingEmail = {
+      username: 'testingUser',
+      password: 'testingPassword'
+    };
+    const missingEmailRes = await request(server)
+      .post('/api/auth/register')
+      .send(missingEmail);
+    expect(missingEmailRes.status).toBe(400);
+  });
+  it('should return a 400 when password is missing', async () => {
+    const missingPassword = {
+      username: 'testingUser',
+      email: 'testing@designyourlife.com'
+    };
+    const missingPasswordRes = await request(server)
+      .post('/api/auth/register')
+      .send(missingPassword);
+    expect(missingPasswordRes.status).toBe(400);
+  });
 });

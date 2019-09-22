@@ -13,7 +13,7 @@ server.use(express.json());
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
-  res.status(200);
+  res.status(200).json({ API: 'UP' });
 });
 
 module.exports = server;
