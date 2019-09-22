@@ -4,7 +4,7 @@
   "description": "Backend for Design Your Life App",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch --verbose"
+    "test": "cross-env DB_ENV=testing jest --watch --verbose"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "cross-env": "^6.0.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "helmet": "^3.21.0",
