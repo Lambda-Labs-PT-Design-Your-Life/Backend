@@ -80,3 +80,20 @@ describe('POST /register', () => {
     expect(users[0].password).not.toBe('testPassword');
   });
 });
+
+describe('POST /login', () => {
+  beforeEach(async () => {
+    await request(server)
+      .post('/api/auth/register')
+      .send({
+        username: 'testUser',
+        email: 'testing@designyourlife.com',
+        password: 'testingPassword'
+      });
+  });
+
+  it('should return 200 when a user succesfully logs in', async () => {
+    const res = await request(server).post('/api/auth/login')
+    expect(res.status).toBe(200);
+  })
+});

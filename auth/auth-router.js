@@ -22,3 +22,7 @@ authRouter.post('/register', (req, res) => {
       });
   }
 });
+
+authRouter.post('/login', (req, res) => {
+  res.status(200).json('Succesful login');
+});
