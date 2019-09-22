@@ -4,7 +4,8 @@
   "description": "Backend for Design Your Life App",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env DB_ENV=testing jest --watch --verbose"
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -34,3 +35,4 @@
     "nodemon": "^1.19.2"
   }
 }
+
