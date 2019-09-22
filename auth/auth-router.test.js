@@ -17,5 +17,7 @@ describe('POST /register', () => {
     const missingUsernameRes = await request(server)
       .post('/api/auth/register')
       .send(missingUsername);
+
+    expect(missingUsernameRes.status).toBe(400);
   });
 });
