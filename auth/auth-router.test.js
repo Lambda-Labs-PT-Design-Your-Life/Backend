@@ -92,8 +92,51 @@ describe('POST /login', () => {
       });
   });
 
+  it('should return a 400 when username is missing', async () => {
+    const missingUsername = {
+      password: 'testingPassword'
+    };
+    const missingUsernameRes = await request(server)
+      .post('/api/auth/register')
+      .send(missingUsername);
+    expect(missingUsernameRes.status).toBe(400);
+  });
+
+  it('should return a 400 when password is missing', async () => {
+    const missingPassword = {
+      username: 'testingUser',
+      email: 'testing@designyourlife.com'
+    };
+    const missingPasswordRes = await request(server)
+      .post('/api/auth/register')
+      .send(missingPassword);
+    expect(missingPasswordRes.status).toBe(400);
+  });
+
   it('should return 200 when a user succesfully logs in', async () => {
-    const res = await request(server).post('/api/auth/login')
+    const res = await request(server)
+      .post('/api/auth/login')
+      .send({
+        username: 'testUser',
+        email: 'testing@designyourlife.com',
+        password: 'testingPassword'
+      });
     expect(res.status).toBe(200);
-  })
+  });
+  it('should return a 401 when the user provides invalid credentials', async () => {
+    const wrongUser = { username: 'testWhat', password: 'testingPassword' };
+    const wrongUserRes = await request(server)
+      .post('/api/auth/login')
+      .send(wrongUser);
+    expect(wrongUserRes.status).toBe(401);
+
+    const wrongPassword = {
+      username: 'testingUser',
+      password: 'wrongPassword'
+    };
+    const wrongPasswordRes = await request(server)
+      .post('/api/auth/login')
+      .send(wrongPassword);
+    expect(wrongPasswordRes.status).toBe(401);
+  });
 });
