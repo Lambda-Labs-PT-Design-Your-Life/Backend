@@ -113,7 +113,7 @@ describe('POST /login', () => {
     expect(missingPasswordRes.status).toBe(400);
   });
 
-  it('should return 200 when a user succesfully logs in', async () => {
+  it('should return 200 when a user successfully logs in', async () => {
     const res = await request(server)
       .post('/api/auth/login')
       .send({
