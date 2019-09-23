@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = authenticate;
 
-const authenticate = (req, res, next) => {
+function authenticate(req, res, next) {
   const token = req.headers.authorization;
 
   if (token) {
@@ -20,4 +20,4 @@ const authenticate = (req, res, next) => {
   res.status(403).json({
     message: 'not authorized no authorization token provided in headers'
   });
-};
+}
