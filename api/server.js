@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const server = express();
-const authRouter = require('../auth/auth-router');
+const authRouter = require('./auth/auth-router');
 
 //thirdparty middleware
 server.use(helmet());
