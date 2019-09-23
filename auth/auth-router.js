@@ -29,7 +29,7 @@ authRouter.post('/login', (req, res) => {
   Users.findUserByUsername(user.username).then(foundUser => {
     if (foundUser && bcrypt.compareSync(user.password, foundUser.password)) {
       // a jwt should be generated here
-      //   const token = generateToken(user);
+      const token = generateToken(user);
       res.status(200).json({
         message: `Welcome ${foundUser.username}!`,
         token: token
