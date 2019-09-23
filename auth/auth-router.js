@@ -2,6 +2,7 @@ const authRouter = require('express').Router();
 const bcrypt = require('bcryptjs');
 const Users = require('../models/users-models');
 const generateToken = require('../middleware/generateToken.js');
+const jwt = require('jsonwebtoken');
 
 module.exports = authRouter;
 
@@ -28,11 +29,12 @@ authRouter.post('/login', (req, res) => {
   let user = req.body;
   Users.findUserByUsername(user.username).then(foundUser => {
     if (foundUser && bcrypt.compareSync(user.password, foundUser.password)) {
-      // a jwt should be generated here
-      const token = generateToken(user);
+      // a jwt should be generated here based off of the user found in the database
+      const token = generateToken(foundUser);
+      const decodedToken = jwt.decode(token);
       res.status(200).json({
-        message: `Welcome ${foundUser.username}!`,
-        token: token
+        token: token,
+        userID: decodedToken.sub
       });
     } else {
       res.status(401).json({ message: 'Wrong Username or Password' });

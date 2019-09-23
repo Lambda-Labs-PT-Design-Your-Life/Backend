@@ -4,8 +4,10 @@ module.exports = generateToken;
 
 function generateToken(user) {
   const payload = {
+    user: user,
     sub: user.id,
-    username: user.username
+    username: user.username,
+    email: user.email
   };
 
   const options = {
