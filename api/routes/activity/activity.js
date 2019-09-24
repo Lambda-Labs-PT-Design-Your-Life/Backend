@@ -1,5 +1,5 @@
 const activityRouter = require('express').Router();
-const activities = require('../../models/activity.js/index.js');
+const Activity = require('../../models/activity');
 
 module.exports = activityRouter;
 
