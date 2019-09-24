@@ -22,3 +22,21 @@ reflectionRouter.post('/', (req, res) => {
       });
   }
 });
+
+reflectionRouter.get(':/reflectionId', (req, res) => {
+  const { reflectionId } = req.params;
+
+  Reflection.findReflectionByReflectionId(reflectionId)
+    .then(reflection => {
+      if (!reflection) {
+        res
+          .status(404)
+          .json({ message: 'No reflection found by that Id in the database' });
+      } else {
+        res.status(200).json(reflection);
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message });
+    });
+});
