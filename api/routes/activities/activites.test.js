@@ -1,7 +1,7 @@
 const request = require('supertest');
 const server = require('../server');
 const jwt = require('jsonwebtoken');
-const db = require('../../database/dbConfig');
+const db = require('../../../database/dbConfig');
 
 xdescribe('The Activities Router', () => {
   beforeEach(async (req, res) => {
