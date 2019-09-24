@@ -5,6 +5,7 @@ module.exports = {
   deleteActivity,
   updateActivity,
   findAllActivityByUser,
+  findAllActivities,
   findActivityByActivityId
 };
 
@@ -32,11 +33,15 @@ function findActivityByActivityId(activityId) {
     .first();
 }
 
+function findAllActivities() {
+  return db('activities');
+}
+
 function findAllActivityByUser(userId) {
   return db('activities as a')
     .join('users as u', 'u.id', 'a.userId')
     .select(
-      'a.activityId',
+      'a.userId',
       'a.activityName',
       'a.category',
       'a.duration',

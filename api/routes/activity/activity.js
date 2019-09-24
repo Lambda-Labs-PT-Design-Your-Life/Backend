@@ -108,3 +108,17 @@ activityRouter.put('/:activityId', (req, res) => {
       res.status(500).json({ message: err.message });
     });
 });
+
+activityRouter.get('/activities', (req, res) => {
+  Activity.findAllActivities()
+    .then(activities => {
+      if (!activities) {
+        res.status(404).json({ message: 'No activities' });
+      } else {
+        res.status(200).json(activities);
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message });
+    });
+});
