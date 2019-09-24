@@ -1,5 +1,5 @@
 const db = require('../../database/dbConfig');
-const Acitivities = require('./activities');
+const Activity = require('./activity');
 
 describe('Activities Model', () => {
   beforeEach(async (req, res) => {
@@ -19,7 +19,7 @@ describe('Activities Model', () => {
         engagementLevel: 8,
         enjoymentLevel: 8
       };
-      const post = await Acitivities.addActivity(postData);
+      const post = await Activity.addActivity(postData);
 
       const posts = await db('activities');
       expect(posts.length).toBe(1);
