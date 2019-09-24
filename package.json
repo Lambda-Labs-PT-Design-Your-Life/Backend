@@ -1,0 +1,38 @@
+{
+  "name": "design-your-life-backend",
+  "version": "1.0.0",
+  "description": "Backend for Design Your Life App",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lambda-Labs-PT-Design-Your-Life/Backend.git"
+  },
+  "author": "Cody Brewer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lambda-Labs-PT-Design-Your-Life/Backend/issues"
+  },
+  "homepage": "https://github.com/Lambda-Labs-PT-Design-Your-Life/Backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cross-env": "^6.0.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.0",
+    "jest": "^24.9.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.4",
+    "sqlite3": "^4.1.0",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.2"
+  }
+}
+
