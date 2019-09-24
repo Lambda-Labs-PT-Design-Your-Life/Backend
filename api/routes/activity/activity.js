@@ -43,15 +43,15 @@ activityRouter.post('/', (req, res) => {
   }
 });
 
-activityRouter.get('/:actvityId', (req, res) => {
+activityRouter.get('/:activityId', (req, res) => {
   const { activityId } = req.params;
-
+  console.log(activityId);
   Activity.findActivityByActivityId(activityId)
     .then(activity => {
       if (!activity) {
         res
           .status(404)
-          .json({ message: 'No activty by that Activity Id in the Database' });
+          .json({ message: 'No activity by that Activity Id in the Database' });
       } else {
         res.status(200).json(activity);
       }
@@ -94,7 +94,10 @@ activityRouter.delete('/:activityId', (req, res) => {
 
 activityRouter.put('/:activityId', (req, res) => {
   const { activityId } = req.params;
-  const { activity } = req.body;
+  const activity = req.body;
+
+  console.log(activityId);
+  console.log(activity);
 
   Activity.updateActivity(activityId, activity)
     .then(activity => {

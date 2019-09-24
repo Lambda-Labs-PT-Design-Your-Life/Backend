@@ -28,8 +28,9 @@ function updateActivity(activityId, activity) {
 }
 
 function findActivityByActivityId(activityId) {
+  console.log(activityId);
   return db('activities')
-    .where('activityId', activityId)
+    .where({ activityId })
     .first();
 }
 

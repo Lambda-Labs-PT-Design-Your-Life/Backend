@@ -15,8 +15,8 @@ server.use(express.json());
 
 //endpoint routes
 server.use('/api/auth', authRouter);
-server.use('/api/activity', /*authenticate ,*/ activityRouter);
-server.use('/api/reflection', /*authenticate ,*/ reflectionRouter);
+server.use('/api/activity', authenticate, activityRouter);
+server.use('/api/reflection', authenticate, reflectionRouter);
 
 server.get('/', (req, res) => {
   res.status(200).json({ API: 'UP' });
