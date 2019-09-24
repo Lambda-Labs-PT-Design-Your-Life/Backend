@@ -44,7 +44,7 @@ function findAllActivityByUser(userId) {
       'a.createdDate',
       'a.energyLevel',
       'a.engagementLevel',
-      'a.enjoytmentLevel',
+      'a.enjoymentLevel',
       'u.username as createdBy'
     )
     .where('a.userId', userId);
