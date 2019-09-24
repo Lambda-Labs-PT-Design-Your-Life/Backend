@@ -18,7 +18,7 @@ activityRouter.post('/', (req, res) => {
   ) {
     res.status(400).json({
       message:
-        'Post missing properties, post must include userId activityName category duration description creadtedDate energyLevel engagementLevel enjoymentLevel'
+        'Activity missing properties, activity must include userId activityName category duration description creadtedDate energyLevel engagementLevel enjoymentLevel'
     });
   } else if (
     activity.energyLevel > 10 ||
@@ -30,7 +30,7 @@ activityRouter.post('/', (req, res) => {
   ) {
     res.status(400).json({
       message:
-        'Post energyLevel, engagementLevel, and enjoymentLevel must be between 0 and 100'
+        'Activity energyLevel, engagementLevel, and enjoymentLevel must be between 0 and 100'
     });
   } else {
     Activity.addActivity(activity)
