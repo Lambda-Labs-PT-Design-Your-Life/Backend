@@ -4,35 +4,43 @@ const Activity = require('../../models/activity');
 module.exports = activityRouter;
 
 activityRouter.post('/', (req, res) => {
-  let post = req.body;
+  let activity = req.body;
   if (
-    !post.userId ||
-    !post.name ||
-    !post.category ||
-    !post.date ||
-    !post.startTime ||
-    !post.activityLength ||
-    !post.energyLevel ||
-    !post.engagementLevel ||
-    !post.enjoymentLevel
+    !activity.userId ||
+    !activity.activityName ||
+    !activity.category ||
+    !activity.duration ||
+    !activity.description ||
+    !activity.creadtedDate ||
+    !activity.energyLevel ||
+    !activity.engagementLevel ||
+    !activity.enjoymentLevel
   ) {
     res.status(400).json({
       message:
-        'Post missing properties, post must include userId, name, category, date, startTime, activityLength, energyLevel, engagementLevel, enjoymentLevel'
+        'Post missing properties, post must include userId activityName category duration description creadtedDate energyLevel engagementLevel enjoymentLevel'
     });
   } else if (
-    post.energyLevel > 10 ||
-    post.energyLevel < 0 ||
-    post.engagementLevel > 10 ||
-    post.engagmentLevel < 0 ||
-    post.enjoymentLevel > 10 ||
-    post.enjoymentLevel < 0
+    activity.energyLevel > 10 ||
+    activity.energyLevel < 0 ||
+    activity.engagementLevel > 10 ||
+    activity.engagmentLevel < 0 ||
+    activity.enjoymentLevel > 10 ||
+    activity.enjoymentLevel < 0
   ) {
     res.status(400).json({
       message:
         'Post energyLevel, engagementLevel, and enjoymentLevel must be between 0 and 100'
     });
   } else {
-    res.status(201).json({ message: 'Post successfull' });
+    Activity.addActivity(activity)
+      .then(activity => {
+        res
+          .status(201)
+          .json(`activity created activityId: ${activity.activityId}`);
+      })
+      .catch(err => {
+        res.status(500).json({ message: err.message });
+      });
   }
 });

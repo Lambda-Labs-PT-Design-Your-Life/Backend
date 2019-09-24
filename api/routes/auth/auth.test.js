@@ -1,6 +1,6 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
-const server = require('../server');
+const server = require('../../server');
 const db = require('../../../database/dbConfig');
 
 beforeEach(async () => {

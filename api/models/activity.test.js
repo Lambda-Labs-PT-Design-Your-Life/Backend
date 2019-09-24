@@ -10,11 +10,11 @@ describe('Activities Model', () => {
     it('should add the activity to the database', async () => {
       const postData = {
         userId: 1,
-        name: 'coding homework',
+        activityName: 'coding homework',
         category: 'programming',
-        date: '09/23/2019',
-        startTime: '02:25PM',
-        activityLength: '1hr',
+        duration: '1 hour',
+        description: 'programming for school',
+        createdDate: '09/23/2019',
         energyLevel: 5,
         engagementLevel: 8,
         enjoymentLevel: 8

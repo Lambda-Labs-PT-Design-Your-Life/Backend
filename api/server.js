@@ -9,7 +9,7 @@ const authenticate = require('../middleware/authenticate');
 
 //thirdparty middleware
 server.use(helmet());
-server.use(cors());
+server.use(cors({}));
 server.use(express.json());
 
 //endpoint routes
