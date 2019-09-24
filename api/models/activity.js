@@ -20,21 +20,19 @@ function deleteActivity(activityId) {
     .del();
 }
 
-function updateActivity(activityId, changes) {
+function updateActivity(activityId, activity) {
   return db('activities')
-    .where({ activityId })
-    .update(changes);
+    .where('activityId', activityId)
+    .update(activity);
 }
 
 function findActivityByActivityId(activityId) {
-  return db('activities')
-    .where({ activityId })
-    .first();
+  return db('activities as a').where('a.activityId', activityId);
 }
 
 function findAllActivityByUser(userId) {
   return db('activities as a')
-    .join('users as u', 'u.id', 'a.user_id')
-    .select('a.activityId', 'a.name', 'u.username as createdBy')
+    .join('users as u', 'u.id', 'a.userId')
+    .select('a.activityId', 'a.activityName', 'u.username as createdBy')
     .where('a.userId', userId);
 }

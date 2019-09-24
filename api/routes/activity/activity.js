@@ -4,14 +4,14 @@ const Activity = require('../../models/activity');
 module.exports = activityRouter;
 
 activityRouter.post('/', (req, res) => {
-  let activity = req.body;
+  const activity = req.body;
   if (
     !activity.userId ||
     !activity.activityName ||
     !activity.category ||
     !activity.duration ||
     !activity.description ||
-    !activity.creadtedDate ||
+    !activity.createdDate ||
     !activity.energyLevel ||
     !activity.engagementLevel ||
     !activity.enjoymentLevel
@@ -35,12 +35,76 @@ activityRouter.post('/', (req, res) => {
   } else {
     Activity.addActivity(activity)
       .then(activity => {
-        res
-          .status(201)
-          .json(`activity created activityId: ${activity.activityId}`);
+        res.status(201).json({ createdActivity: activity });
       })
       .catch(err => {
         res.status(500).json({ message: err.message });
       });
   }
+});
+
+activityRouter.get('/:actvityId', (req, res) => {
+  const { activityId } = req.params;
+
+  Activity.findActivityByActivityId(activityId)
+    .then(activity => {
+      if (!activity) {
+        res
+          .status(404)
+          .json({ message: 'No activty by that Activity Id in the Database' });
+      } else {
+        res.status(200).json(activity);
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message });
+    });
+});
+
+activityRouter.get('/user/:userId', (req, res) => {
+  const { userId } = req.params;
+
+  Activity.findAllActivityByUser(userId)
+    .then(activitiesByUser => {
+      if (!activitiesByUser) {
+        res.status(404).json({ message: 'No Activites by that user' });
+      } else {
+        res.status(200).json(activitiesByUser);
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message });
+    });
+});
+
+activityRouter.delete('/:activityId', (req, res) => {
+  const { activityId } = req.params;
+  Activity.deleteActivity(activityId)
+    .then(activity => {
+      if (!activity) {
+        res.status(404).json({ message: 'No activity by that activityId' });
+      } else {
+        res.status(200).json({ message: 'activity deleted' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message });
+    });
+});
+
+activityRouter.put('/:activityId', (req, res) => {
+  const { activityId } = req.params;
+  const { activity } = req.body;
+
+  Activity.updateActivity(activityId, activity)
+    .then(activity => {
+      if (!activity) {
+        res.status(404).json({ message: 'No activity by that id' });
+      } else {
+        res.status(200).json({ message: 'activity updated' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message });
+    });
 });
