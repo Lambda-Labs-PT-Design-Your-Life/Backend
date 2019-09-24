@@ -27,12 +27,25 @@ function updateActivity(activityId, activity) {
 }
 
 function findActivityByActivityId(activityId) {
-  return db('activities as a').where('a.activityId', activityId);
+  return db('activities')
+    .where('a.activityId', activityId)
+    .first();
 }
 
 function findAllActivityByUser(userId) {
   return db('activities as a')
     .join('users as u', 'u.id', 'a.userId')
-    .select('a.activityId', 'a.activityName', 'u.username as createdBy')
+    .select(
+      'a.activityId',
+      'a.activityName',
+      'a.category',
+      'a.duration',
+      'a.description',
+      'a.createdDate',
+      'a.energyLevel',
+      'a.engagementLevel',
+      'a.enjoytmentLevel',
+      'u.username as createdBy'
+    )
     .where('a.userId', userId);
 }
