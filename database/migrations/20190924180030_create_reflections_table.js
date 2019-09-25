@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('reflections', reflections => {
     //reflectionId autoincrements
-    reflections.increments('reflectiondId');
+    reflections.increments('reflectionId');
     //userId of the user that created the reflections
     reflections.integer('userId').notNullable();
     //relectionDate
@@ -12,5 +12,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.droptTableIfExists('reflections');
+  return knex.schema.dropTableIfExists('reflections');
 };

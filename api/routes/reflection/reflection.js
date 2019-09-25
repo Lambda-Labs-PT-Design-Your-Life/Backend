@@ -14,8 +14,8 @@ reflectionRouter.post('/', (req, res) => {
     });
   } else {
     Reflection.addReflection(reflection)
-      .then(reflection => {
-        res.status(201).json({ createdReflection: reflection });
+      .then(createdReflection => {
+        res.status(201).json({ createdReflection: createdReflection });
       })
       .catch(err => {
         res.status(500).json({ message: err.message });

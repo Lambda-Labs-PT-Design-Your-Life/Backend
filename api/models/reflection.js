@@ -16,7 +16,7 @@ async function addReflection(reflection) {
 
 function findReflectionByReflectionId(reflectionId) {
   return db('reflections')
-    .where('reflectionId', reflectionId)
+    .where({ reflectionId })
     .first();
 }
 
