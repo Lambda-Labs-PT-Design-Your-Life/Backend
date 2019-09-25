@@ -27,7 +27,7 @@ reflectionRouter.post('/', (req, res) => {
   }
 });
 
-reflectionRouter.get('/reflection/:reflectionId', (req, res) => {
+reflectionRouter.get('/:reflectionId', (req, res) => {
   const { reflectionId } = req.params;
 
   Reflection.findReflectionByReflectionId(reflectionId)
@@ -64,7 +64,7 @@ reflectionRouter.get('/user/:userId', (req, res) => {
     });
 });
 
-reflectionRouter.delete('/reflection/:reflectionId', (req, res) => {
+reflectionRouter.delete('/:reflectionId', (req, res) => {
   const { reflectionId } = req.params;
 
   Reflection.deleteReflection(reflectionId)
@@ -80,7 +80,7 @@ reflectionRouter.delete('/reflection/:reflectionId', (req, res) => {
     });
 });
 
-reflectionRouter.put('/reflection/:reflectionId', (req, res) => {
+reflectionRouter.put('/:reflectionId', (req, res) => {
   const { reflectionId } = req.params;
   const reflection = req.body;
 

@@ -17,7 +17,11 @@ authRouter.post('/register', (req, res) => {
     user.password = hash;
     Users.addUser(user)
       .then(saved => {
-        res.status(201).json({ userId: saved.userId });
+        if (saved) {
+          res.status(201).json(saved);
+        } else {
+          res.status(400).json({ somethingWrongWithSavingUser: saved });
+        }
       })
       .catch(error => {
         res.status(500).json({ message: error.message });
