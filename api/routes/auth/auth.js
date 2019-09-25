@@ -18,7 +18,7 @@ authRouter.post('/register', (req, res) => {
     Users.addUser(user)
       .then(saved => {
         if (saved) {
-          res.status(201).json(saved.userId);
+          res.status(201).json(saved);
         } else {
           res.status(400).json({ somethingWrongWithSavingUser: saved });
         }
