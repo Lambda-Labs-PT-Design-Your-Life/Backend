@@ -7,9 +7,7 @@ module.exports = {
 };
 
 async function addUser(user) {
-  const [id] = await db('users').insert(user);
-
-  return findUserById(id);
+  return db('users').insert(user, id);
 }
 function findUserByUsername(username) {
   return db('users')
