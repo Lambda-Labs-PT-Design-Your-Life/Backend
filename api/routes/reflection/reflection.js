@@ -6,11 +6,15 @@ module.exports = reflectionRouter;
 reflectionRouter.post('/', (req, res) => {
   const reflection = req.body;
   if (
-    (!reflection.userId, !reflection.reflectionDate, !reflection.reflectionText)
+    (!reflection.userId,
+    !reflection.week,
+    !reflection.reflectionText,
+    !reflection.insights,
+    !reflection.trends)
   ) {
     res.status(400).json({
       message:
-        'reflection must include userId, reflectionDate, and reflectionText'
+        'reflection must include userId, week, reflectionText, insights, and trends'
     });
   } else {
     Reflection.addReflection(reflection)
