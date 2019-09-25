@@ -15,17 +15,16 @@ authRouter.post('/register', (req, res) => {
   } else {
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash;
-    Users.addUser(user)
-      .then(saved => {
-        if (saved) {
-          res.status(201).json(saved.userId);
-        } else {
-          res.status(400).json({ somethingWrongWithSavingUser: saved });
-        }
-      })
-      .catch(error => {
-        res.status(500).json({ message: 'something went wrong' });
-      });
+    Users.addUser(user).then(saved => {
+      if (saved) {
+        res.status(201).json(saved.userId);
+      } else {
+        res.status(400).json({ somethingWrongWithSavingUser: saved });
+      }
+    });
+    //     .catch(error => {
+    //       res.status(500).json({ message: 'something went wrong' });
+    //     });
   }
 });
 
