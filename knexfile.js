@@ -1,3 +1,5 @@
+const dbConnection = process.DATABASE_URL;
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -21,5 +23,21 @@ module.exports = {
     seeds: {
       directory: './database/seeds'
     }
+  },
+  production: {
+    client: 'pg',
+    connection: dbConnection,
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: './database/migrations',
+      tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './database/seeds'
+    },
+    useNullAsDefault: true
   }
 };
