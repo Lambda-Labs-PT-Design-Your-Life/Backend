@@ -10,7 +10,6 @@ const reflectionRouter = require('./routes/reflection/reflection');
 const authenticate = require('../middleware/authenticate');
 
 //thirdparty middleware
-server.use(logger('dev'));
 server.use(helmet());
 server.use(cors({}));
 server.use(express.json());
