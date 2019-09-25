@@ -35,7 +35,12 @@ function updateReflection(reflectionId, reflection) {
 function findAllReflectionsByUser(userId) {
   return db('reflections as r')
     .join('users as u', 'u.id', 'r.userId')
-    .select('');
+    .select(
+      'r.reflectionId',
+      'r.reflectionDate',
+      'r.reflectionText',
+      'u.username as created by'
+    );
 }
 
 function finddAllReflections() {

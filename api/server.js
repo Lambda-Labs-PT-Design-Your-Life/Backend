@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const logger = require('morgan');
 const server = express();
 const authRouter = require('./routes/auth/auth');
 const activityRouter = require('./routes/activity/activity');
@@ -9,6 +10,7 @@ const reflectionRouter = require('./routes/reflection/reflection');
 const authenticate = require('../middleware/authenticate');
 
 //thirdparty middleware
+server.use(logger('dev'));
 server.use(helmet());
 server.use(cors({}));
 server.use(express.json());
