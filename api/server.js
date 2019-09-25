@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const logger = require('morgan');
+
 const server = express();
 const authRouter = require('./routes/auth/auth');
 const activityRouter = require('./routes/activity/activity');
