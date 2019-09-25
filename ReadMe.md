@@ -102,6 +102,6 @@ Reflections takes in 5 required fields:
 
 Both activities and reflections auto-generate an id
 
-If you navigate to either activity or reflection endpoint with an id at the end (`https://design-your-life-backend.herokuapp.com/api/reflection/1`), this will fetch you the reflection or activity matching that id. You can also post an update(put) to these endpoints.
+If you navigate to either activity or reflection endpoint with an id at the end (`https://design-your-life-backend.herokuapp.com/api/reflection/1`), this will fetch you the reflection or activity matching that id. You can also post an update(put) to these endpoints, and delete by sending a delete request to these endpoints.
 
 If you navigate to either activtiy or reflection endpoint with /user/ with a userId at the end (`https://design-your-life-backend.herokuapp.com/api/reflection/user/1`), this will fetch you the reflections or activities that have been created by the user matching with the id.
