@@ -1,5 +1,5 @@
-const db = require('../database/dbConfig');
-const Users = require('./users-models');
+const db = require('../../database/dbConfig');
+const Users = require('./users');
 
 describe('Users Model', () => {
   beforeEach(async () => {
