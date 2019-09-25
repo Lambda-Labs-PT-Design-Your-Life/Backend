@@ -18,7 +18,7 @@ activityRouter.post('/', (req, res) => {
   ) {
     res.status(400).json({
       message:
-        'Post missing properties, post must include userId activityName category duration description creadtedDate energyLevel engagementLevel enjoymentLevel'
+        'Activity missing properties, activity must include userId activityName category duration description creadtedDate energyLevel engagementLevel enjoymentLevel'
     });
   } else if (
     activity.energyLevel > 10 ||
@@ -30,7 +30,7 @@ activityRouter.post('/', (req, res) => {
   ) {
     res.status(400).json({
       message:
-        'Post energyLevel, engagementLevel, and enjoymentLevel must be between 0 and 100'
+        'Activity energyLevel, engagementLevel, and enjoymentLevel must be between 0 and 100'
     });
   } else {
     Activity.addActivity(activity)
@@ -43,15 +43,15 @@ activityRouter.post('/', (req, res) => {
   }
 });
 
-activityRouter.get('/:actvityId', (req, res) => {
+activityRouter.get('/:activityId', (req, res) => {
   const { activityId } = req.params;
-
+  console.log(activityId);
   Activity.findActivityByActivityId(activityId)
     .then(activity => {
       if (!activity) {
         res
           .status(404)
-          .json({ message: 'No activty by that Activity Id in the Database' });
+          .json({ message: 'No activity by that Activity Id in the Database' });
       } else {
         res.status(200).json(activity);
       }
@@ -94,7 +94,10 @@ activityRouter.delete('/:activityId', (req, res) => {
 
 activityRouter.put('/:activityId', (req, res) => {
   const { activityId } = req.params;
-  const { activity } = req.body;
+  const activity = req.body;
+
+  console.log(activityId);
+  console.log(activity);
 
   Activity.updateActivity(activityId, activity)
     .then(activity => {
@@ -102,6 +105,20 @@ activityRouter.put('/:activityId', (req, res) => {
         res.status(404).json({ message: 'No activity by that id' });
       } else {
         res.status(200).json({ message: 'activity updated' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: err.message });
+    });
+});
+
+activityRouter.get('/activities', (req, res) => {
+  Activity.findAllActivities()
+    .then(activities => {
+      if (!activities) {
+        res.status(404).json({ message: 'No activities' });
+      } else {
+        res.status(200).json(activities);
       }
     })
     .catch(err => {
