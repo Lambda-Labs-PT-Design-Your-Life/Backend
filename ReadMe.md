@@ -1,39 +1,107 @@
-*server hosted at*: https://design-your-life-backend.herokuapp.com/
+<h1>Design Your Life - Backend</h1>
 
-*Endpoints* 
+<b>With NodeJS, Postgres, and JWT</b>
 
-To register a user make a post request to /api/auth/register
-    send JSON Object with {username, password, email}
+<strong><h2>Setup</h2></strong>
 
-To login a user make a post request to /api/auth/login
-    send JSON Object with {username, password}
-    Endpoint will return a JWT Token that will need to be saved to local storage as authorization
-    JWT Token can be decoded and will include the user's email and userId.
+<em>Let's get started</em>
 
-To add an activity post make a post request to /api/activity
-    send JWT Token saved in local storage as headers
-    send JSON Object with {userId, activityName, category, duration, descriptiion, createdDate, energyLevel, enjoymentLevel}
+`Download the repo, clone, and install into the directory of your choice`
 
-To view all activities created by a user make a get request to /api/activity/:userId (replace :userId with the user's id)
-    This will return all activities created by the user as a json object
+<strong>Install dependencies</strong>
 
-To view a single activity send a get request to /api/acitivity/:activityId (replace :activityId with the acitivityId that you want to view) 
-    This will return the activity with the matching activityId
+`Navigate into the backend folder, open your terminal, and type "npm install"`
 
-To update an activity send a put request to /api/acitivity/:activityId (replace :activityId with the acitivityId that you want to update) 
+<strong>Testing endpoints</strong>
 
-To delete and activity send a delete request to /api/acitivity/:activityId (replace :activityId with the acitivityId that you want to delete) 
+`Simply type "npm test" and the testing will begin`
 
-To add an activity post make a post request to /api/reflection
-    send JWT Token saved in local storage as headers
-    send JSON Object with {userId, reflectionDate, reflectionText}
+<strong>Start the server</strong>
 
-To view all reflectoins created by a user make a get request to /api/reflection/user/:userId (replace :userId with the user's id)
-    This will return all reflections created by the user as a json object
+`Open your terminal and type "npm start"`
 
-To view a single reflection send a get request to /api/reflection/:reflectionId (replace :reflectionId with the reflectionId that you want to view) 
-    This will return the reflecton with the matching reflectionId
+Now you are ready to test your endpoints.
 
-To update an reflection send a put request to /api/reflection/:reflectionId (replace :reflectionId with the reflectionId that you want to update) 
+<strong><h2>Endpoints</h2></strong>
 
-To delete a reflection send a delete request to /api/reflection/:reflectionId (replace :reflectionId with the reflectionId that you want to delete) 
+The database consists of three tables (Users, Activities, and Reflections)
+
+To register a new user, send a post request to `https://design-your-life-backend.herokuapp.com/api/auth/register`
+
+This register endpoint takes in three required fields:
+
+```
+{
+    username: string,
+    password: string,
+    email: string
+}
+```
+
+This will return the id of the user you just created, which is auto-generated.
+
+Now you can head over to login at `https://design-your-life-backend.herokuapp.com/api/auth/login`
+
+```
+{
+    username: string
+    password: string
+}
+```
+
+<em>If correct login information is entered, you should receive back an object with your your userId, and a JWT token.</em>
+
+```
+{
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9xxxxxxx....
+    userId: 1,
+}
+```
+
+<em><strong>This token is required to access all other endpoints.
+
+You must mount this token into headers as `authorization: ${token}`</strong></em>
+
+After you have successfully logged in and mounted your token, you can head over to either:
+
+`https://design-your-life-backend.herokuapp.com/api/activity`
+
+or
+
+`https://design-your-life-backend.herokuapp.com/api/reflection`
+
+This get request will return a list of activities or reflections that belong to the user you are logged in as.
+
+To post, activities takes in 9 fields, all required:
+
+```
+{
+	userId: integer,
+	activityName: string,
+	category: string,
+	duration: string,
+	description: string,
+	createdDate: string,
+	energyLevel: integer,
+	engagementLevel: integer,
+	enjoymentLevel: integer
+}
+```
+
+Reflections takes in 5 required fields:
+
+```
+{
+	userId: integer,
+	week: string,
+	reflectionText: string,
+	insights: string,
+	trends: string
+}
+```
+
+Both activities and reflections auto-generate an id
+
+If you navigate to either activity or reflection endpoint with an id at the end (`https://design-your-life-backend.herokuapp.com/api/reflection/1`), this will fetch you the reflection or activity matching that id. You can also post an update(put) to these endpoints.
+
+If you navigate to either activtiy or reflection endpoint with /user/ with a userId at the end (`https://design-your-life-backend.herokuapp.com/api/reflection/user/1`), this will fetch you the reflections or activities that have been created by the user matching with the id.
