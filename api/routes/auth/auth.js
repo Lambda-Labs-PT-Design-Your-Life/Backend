@@ -17,7 +17,7 @@ authRouter.post('/register', (req, res) => {
     user.password = hash;
     Users.addUser(user)
       .then(saved => {
-        res.status(201).json({ message: 'User Registered Succesfully' });
+        res.status(201).json({ userId: saved.userId });
       })
       .catch(error => {
         res.status(500).json({ message: error.message });
