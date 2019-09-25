@@ -11,8 +11,8 @@ module.exports = {
 
 async function addActivity(activity) {
   const [activityId] = await db('activities').insert(activity);
-
-  return findActivityByActivityId(activityId);
+  return activityId;
+  // return findActivityByActivityId(activityId);
 }
 
 function deleteActivity(activityId) {

@@ -11,7 +11,8 @@ module.exports = {
 
 async function addReflection(reflection) {
   const [reflectionId] = await db('reflections').insert(reflection);
-  return findReflectionByReflectionId(reflectionId);
+  return reflectionId;
+  // return findReflectionByReflectionId(reflectionId);
 }
 
 function findReflectionByReflectionId(reflectionId) {
