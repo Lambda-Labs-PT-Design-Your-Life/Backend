@@ -33,14 +33,8 @@ function updateReflection(reflectionId, reflection) {
 }
 
 function findAllReflectionsByUser(userId) {
-  return db('reflections as r')
-    .join('users as u', 'u.id', 'r.userId')
-    .select(
-      'r.reflectionId',
-      'r.reflectionDate',
-      'r.reflectionText',
-      'u.username as created by'
-    );
+  console.log(userId);
+  return db('reflections').where('userId', userId);
 }
 
 function finddAllReflections() {
