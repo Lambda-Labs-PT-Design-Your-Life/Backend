@@ -6,7 +6,7 @@ module.exports = {
   findUserById
 };
 
-async function addUser(user) {
+function addUser(user) {
   return db('users').insert(user, 'id');
 }
 function findUserByUsername(username) {
