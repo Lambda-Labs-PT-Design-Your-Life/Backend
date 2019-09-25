@@ -7,7 +7,7 @@ module.exports = {
 };
 
 async function addUser(user) {
-  return db('users').insert(user, id);
+  return db('users').insert(user, 'id');
 }
 function findUserByUsername(username) {
   return db('users')
