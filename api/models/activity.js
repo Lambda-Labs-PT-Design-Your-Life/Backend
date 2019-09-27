@@ -37,19 +37,6 @@ function findAllActivities() {
 }
 
 function findAllActivityByUser(userId) {
-  return db('activities as a')
-    .join('users as u', 'u.id', 'a.userId')
-    .select(
-      'a.userId',
-      'a.activityName',
-      'a.category',
-      'a.duration',
-      'a.description',
-      'a.createdDate',
-      'a.energyLevel',
-      'a.engagementLevel',
-      'a.enjoymentLevel',
-      'u.username as createdBy'
-    )
-    .where('a.userId', userId);
+  return db('activities')   
+    .where({ userId });
 }
