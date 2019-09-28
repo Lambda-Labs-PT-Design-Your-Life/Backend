@@ -40,6 +40,7 @@ function findAllActivityByUser(userId) {
   return db('activities as a')
     .join('users as u', 'u.id', 'a.userId')
     .select(
+      'a.id',
       'a.userId',
       'a.activityName',
       'a.category',
